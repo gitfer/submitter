@@ -1,17 +1,43 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+
 import './App.css';
 
 class App extends Component {
+  getTodayFormatted() {
+    const date = new Date();
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    const year = date.getFullYear();
+
+    if (month < 10) month = "0" + month;
+    if (day < 10) day = "0" + day;
+
+    const today = year + "-" + month + "-" + day;  
+    return today;
+  };
+
+  constructor(){
+    super();
+  }
   render() {
+    const today = this.getTodayFormatted();
+    const expenseValue = 40;
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
         <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
+          <form>
+
+            <div className="inputField">
+              <input type="date" value={today} />
+            </div>
+            <div className="inputField">
+              <input type="number" step="0.01" value={expenseValue} />€
+            </div>
+            <div className="inputField">
+              <input type="text" />
+            </div>
+              <input type="submit" value="Save Expense" />
+          </form>
         </p>
       </div>
     );
